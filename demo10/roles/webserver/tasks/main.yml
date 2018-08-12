@@ -1,0 +1,35 @@
+---
+  - command: ls /path/doesnt/exist
+    register: result
+    ignore_errors: yes
+
+
+  - debug: msg="Failed to excute ls command"
+    when: result|failed
+
+  - name: Install Apache Packages
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Deploy Apache Server Custom Configuration
+    template: src=templates/httpd.j2 dest=/etc/httpd/conf/httpd.conf
+    notify:
+      - Restart Apache
+
+  - name: Create Apache Document Root
+    file: path={{doc_root}} state=directory
+
+  - name: Flush the Handlers
+    meta: flush_handlers
+
+  - name: Deploy Site Config Files
+    template: src=templates/index.j2 dest={{doc_root}}/index.html
+    notify:
+      - Nothing
+
+  - name: Flush the Handlers
+    meta: flush_handlers
+
+
+  - name: Start Apache Service
+    service: name=httpd state=started enabled=True
