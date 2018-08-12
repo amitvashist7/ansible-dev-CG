@@ -1,0 +1,8 @@
+---
+# tasks file for server-common
+
+- include: common-user.yaml
+- include: ntp.yaml
+- include: firewall.yaml
+- include: local-action.yaml
+- include: delegate.yaml

@@ -1,0 +1,8 @@
+---
+
+- name: Install NTP Packages
+  yum: name=ntp state=present
+
+- name: Start NTP Server
+  service: name=ntpd state=started
+

@@ -1,0 +1,9 @@
+---
+
+- hosts: windows
+  sudo: yes
+  roles: 
+  - server-common_win
+
+- include: webserver_win.yaml
+- include: dbserver_win.yaml

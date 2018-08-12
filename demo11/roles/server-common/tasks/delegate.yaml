@@ -1,0 +1,5 @@
+---
+
+- name: Delegate Action to 172.31.0.11
+  shell: echo "Welcome to Ansible Automation on" {{inventory_hostname }} > /root/local_action.txt
+  delegate_to: '172.31.0.11'
