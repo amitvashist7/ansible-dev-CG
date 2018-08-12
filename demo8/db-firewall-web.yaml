@@ -20,8 +20,8 @@
   sudo: yes
   vars: 
     http_port: 80
-    doc_root: /var/www/html/ansible-test3
-    doc_dir: /ansible-test3/
+    doc_root: /var/www/html/ansible-test4
+    doc_dir: /ansible-test4/
 
   tasks:
 # Play Time
@@ -44,8 +44,6 @@
     notify: 
       - Restart Apache
 
-
-
   - name: Create Apache Document Root
     file: path={{doc_root}} state=directory
 
@@ -54,6 +52,12 @@
   
   - name: Deploy Site Config Files
     template: src=templates/index.j2 dest={{doc_root}}/index.html
+    notify: 
+      - Nothing
+    
+  - name: Flush the Handlers
+    meta: flush_handlers
+   
 
   - name: Start Apache Service
     service: name=httpd state=started enabled=True
@@ -62,4 +66,5 @@
   handlers: 
     - name: Restart Apache
       service: name=httpd state=restarted
-
+    - name: Nothing
+      service: name=httpd state=restarted
