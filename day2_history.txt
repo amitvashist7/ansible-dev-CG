@@ -1,0 +1,322 @@
+    1  yum install epel-release ansible vim -y 
+    2  yum install git -y 
+    3  ls
+    4  git clone 
+    5  git clone https://github.com/amitvashist7/ansible-dev-CG.git
+    6  ls
+    7  cd ansible-dev-CG/
+    8  ls
+    9  cp -rf demo4 demo5
+   10  ls
+   11  cd demo5/
+   12  ls
+   13  vim inventory 
+   14  ls
+   15  cp -rf ../demo3/prod/ansible.cfg .
+   16  ls
+   17  vim ansible.cfg 
+   18  ls
+   19  vim ansible.cfg 
+   20  vim webserver.ymal
+   21  ls
+   22  vim webserver.yaml
+   23  ansible-playbook webserver.yaml 
+   24  cat inventory 
+   25  vim inventory 
+   26  ansible-playbook webserver.yaml 
+   27  vim inventory 
+   28  cd ..
+   29  ls
+   30  git add .
+   31  git commit -m "My First Apache Install Playbook"
+   32   git config --global user.email "amitvashist7@gmail.com"
+   33   git config --global user.name "Amit Vashist"
+   34  git commit -m "My First Apache Install Playbook"
+   35  git push orgin master
+   36  git push origin master
+   37  ls
+   38  cd demo5/
+   39  ls
+   40  cat ansible.cfg 
+   41  ls
+   42  vim dbserver.yaml
+   43  cat inventory 
+   44  vim dbserver.yaml
+   45  ansible-playbook dbserver.yaml 
+   46  ansible-playbook dbserver.yaml -vvv
+   47  ls
+   48  cp -rf dbserver.yaml db-firewall-web.yaml
+   49  cat webserver.yaml 
+   50  vim db-firewall-web.yaml 
+   51  ls
+   52  ansible-playbook db-firewall-web.yaml 
+   53  vim db-firewall-web.yaml 
+   54  ansible-playbook db-firewall-web.yaml 
+   55  ls
+   56  ls -ltr 
+   57  cat db-firewall-web.retry
+   58  vim db-firewall-web.yaml 
+   59  ansible-playbook db-firewall-web.yaml 
+   60  vim db-firewall-web.yaml 
+   61  cat /root/ansible-dev-CG/demo5/db-firewall-web.retry
+   62  ansible-playbook db-firewall-web.yaml --limit @/root/ansible-dev-CG/demo5/db-firewall-web.retry
+   63  ls
+   64  cd ..
+   65  ls
+   66  cp -rf demo5 demo6
+   67  s
+   68  cd demo6/
+   69  ls
+   70  vim db-firewall-web.yaml 
+   71  ansible-playbook db-firewall-web.yaml 
+   72  vim db-firewall-web.yaml 
+   73  ls
+   74  mkdir templates
+   75  ls
+   76  vim templates/index.j2
+   77  ls
+   78  curl 172.31.0.11
+   79  ls
+   80  vim db-firewall-web.yaml 
+   81  ansible-playbook db-firewall-web.yaml 
+   82  ls
+   83  cd ,,
+   84  cd ..
+   85  ls
+   86  git add .
+   87  git commit -m "When Clause & Jinja2 Templates"
+   88  git push 
+   89  cat demo6/templates/index.j2 
+   90  l
+   91  ls
+   92  scp -r  172.31.0.11:/etc/httpd/conf/httpd.conf .
+   93  ls
+   94  cp -rf demo6 demo7
+   95  mv httpd.conf demo7/templates/httpd.j2
+   96  cd demo7/
+   97  ls
+   98  vim db-firewall-web.yaml 
+   99  vim templates/httpd.j2 
+  100  grep -i "{{" ansible.cfg 
+  101  grep -i "{{" templates/httpd.j2 
+  102  ansible-playbook db-firewall-web.yaml  --check
+  103  ansible-playbook db-firewall-web.yaml  
+  104  vim templates/index.j2 
+  105  cat db-firewall-web.yaml 
+  106  ansible-playbook db-firewall-web.yaml  
+  107  cat templates/index.j2 
+  108  vim db-firewall-web.yaml 
+  109  ls
+  110  cd ..
+  111  ls
+  112  git commit -am "Template & Custom Apache Config"
+  113  git add .
+  114  git commit -am "Template & Custom Apache Config"
+  115  git push 
+  116  ls
+  117  cp -rf demo7 demo8 
+  118  ls
+  119  cd demo8/
+  120  s
+  121  ls
+  122  vim db-firewall-web.yaml 
+  123  ansible-playbook db-firewall-web.yaml  
+  124  vim db-firewall-web.yaml 
+  125  ansible-playbook db-firewall-web.yaml  
+  126  vim db-firewall-web.yaml 
+  127  ansible-playbook db-firewall-web.yaml  
+  128  vim db-firewall-web.yaml 
+  129  ansible-playbook db-firewall-web.yaml  
+  130  vim db-firewall-web.yaml 
+  131  ansible-playbook db-firewall-web.yaml  
+  132  vim db-firewall-web.yaml 
+  133  ansible-playbook db-firewall-web.yaml  
+  134  vim db-firewall-web.yaml 
+  135  ansible-playbook db-firewall-web.yaml  
+  136  vim db-firewall-web.yaml 
+  137  ansible-playbook db-firewall-web.yaml  
+  138  vim db-firewall-web.yaml 
+  139  ansible-playbook db-firewall-web.yaml  
+  140  ls
+  141  cd ..
+  142  ls
+  143  git add .
+  144  git commit -m "Handler, Meta, Debug & Register"
+  145  git push 
+  146  ls
+  147  cd demo8/
+  148  ks
+  149  ls
+  150  vim db-firewall-web.yaml 
+  151  vim templates/index.j2 
+  152  ansible-playbook db-firewall-web.yaml  
+  153  vim templates/index.j2 
+  154  vim db-firewall-web.yaml 
+  155  ansible-playbook db-firewall-web.yaml  
+  156  cd ..
+  157  ls
+  158  git add .
+  159  git commit -m "Multiple Handler & Meta"
+  160  git push 
+  161  ls
+  162  cp -rf demo8/ demo9 
+  163  ls
+  164  cd demo9/
+  165  ls
+  166  mkdir  roles
+  167  ls
+  168  cd roles/
+  169  ls
+  170  ansible-galaxy init server-common
+  171  ansible-galaxy init webserver
+  172  ansible-galaxy init dbserver
+  173  yum install tree -y 
+  174  tree .
+  175  ls
+  176  cd webserver/
+  177  ls
+  178  vim tasks/main.yml 
+  179  vim handlers/main.yml 
+  180  vim tasks/main.yml 
+  181  vim vars/main.yml 
+  182  ls
+  183  cat handlers/main.yml 
+  184  ls
+  185  vim tasks/main.yml 
+  186  cd ..
+  187  ls
+  188  cd ..
+  189  ls
+  190  vim webserver.yaml 
+  191  ls
+  192  ansible-playbook webserver.yaml 
+  193  ls
+  194  cd roles/
+  195  ls
+  196  vim dbserver/tasks/main.yml 
+  197  ls
+  198  cd ..
+  199  ls
+  200  vim dbserver.yaml 
+  201  cp -rf webserver.yaml dbserver.yaml 
+  202  vim dbserver.yaml 
+  203  ansible-playbook dbserver.yaml 
+  204  ls
+  205  cd roles/
+  206  ks
+  207  ls
+  208  tree  .
+  209  cp -rf ../templates/* webserver/templates/
+  210  ls
+  211  vim server-common/tasks/firewall.yaml
+  212  vim server-common/tasks/ntp.yaml
+  213  ls
+  214  vim server-common/tasks/common-user.yaml
+  215  cat /etc/shadow
+  216  vim server-common/tasks/common-user.yaml
+  217  cat /etc/passwd
+  218  cat /etc/shadow
+  219  vim server-common/tasks/common-user
+  220  vim server-common/tasks/common-user.yaml 
+  221  ls
+  222  cd server-common/
+  223  ls
+  224  cd tasks/
+  225  ls
+  226  vim main.yml 
+  227  ls
+  228  cd ..
+  229  ls
+  230  cd ..
+  231  ls
+  232  rm -rf db-*
+  233  ls
+  234  rm -rf templates
+  235  ls
+  236  vim site.yaml
+  237  ansible-playbook site.yaml 
+  238  ls -ltr 
+  239  vim site.yaml
+  240  ansible-playbook site.yaml 
+  241  ls
+  242  cd roles/server-common/
+  243  ls
+  244  cd tasks/
+  245  ls
+  246  cat main.yml 
+  247  cat ../../../site.yaml 
+  248  cat main.yml 
+  249  cat ../../../webserver.yaml 
+  250  ls
+  251  cd ../../../
+  252  ls
+  253  cp -rf site.yaml windows.yaml
+  254  cp -rf site.yaml linux.yaml
+  255  ls
+  256  vim windows.yaml 
+  257  ls
+  258  vim linux.yaml 
+  259  vim site.yaml 
+  260  ansible-playbook site.yaml --tags "linux" 
+  261  ansible-playbook site.yaml --tags=linux
+  262  ansible-playbook site.yaml -tags=linux
+  263  ls
+  264  vim site.yaml 
+  265  ls
+  266  cat windows.yaml 
+  267  ls
+  268  cp -rf webserver_win.yaml
+  269  cp -rf webserver.yaml webserver_win.yaml
+  270  cp -rf dbserver.yaml dbserver_win.yaml 
+  271  ls
+  272  cat windows.yaml 
+  273  ls
+  274  cd roles/
+  275  ls
+  276  cp -rf server-common server-common_win
+  277  ls
+  278  cd ..
+  279  ls
+  280  ansible-playbook site.yaml -tags=linux
+  281  ls
+  282  ls -ltr 
+  283  cat site.yaml 
+  284  ls
+  285  cd ..
+  286  ls
+  287  git add .
+  288  git commit -m "Roles"
+  289  git push 
+  290  ls
+  291  cp -rf demo9/ demo10
+  292  ls
+  293  cd demo10/
+  294  ls
+  295  cd roles/
+  296  ls
+  297  cd server-common
+  298  ls
+  299  cd tasks/
+  300  ls
+  301  vim local-action.yaml
+  302  ls
+  303  cp -rf local-action.yaml delegate.yaml
+  304  vim delegate.yaml 
+  305  ls
+  306  vim main.yml 
+  307  cd 
+  308  ls
+  309  cd ansible-dev-CG/
+  310  ls
+  311  cd demo10/
+  312  ls
+  313  ansible-playbook site.yaml --tags=linux
+  314  cat /root/local_action.txt 
+  315  ls
+  316  cd ..
+  317  ls
+  318  git add .
+  319  git commit -m "Local & Remote Action"
+  320  git push 
+  321  ls
+  322  history > day2_history.txt 
