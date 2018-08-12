@@ -1,0 +1,27 @@
+---
+
+- hosts: db
+  sudo: yes
+  tasks: 
+  - name: Install MariaDb Packages
+    yum: name=mariadb-server state=present
+
+  - name: Start MariaDB Service
+    service: name=mariadb state=started
+
+
+- hosts: datacenter
+  sudo: yes
+  tasks: 
+  - name: Stop the firewall
+    service: name=firewalld state=stopped enabled=False
+
+- hosts: web
+  sudo: yes
+
+  tasks:
+  - name: Install Apache Packages
+    yum: name=httpd state=present
+
+  - name: Start Apache Service
+    service: name=httpd state=restarted enabled=True

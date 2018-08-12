@@ -1,0 +1,31 @@
+---
+
+- hosts: db
+  sudo: yes
+  tasks: 
+  - name: Install MariaDb Packages
+    yum: name=mariadb-server state=present
+
+  - name: Start MariaDB Service
+    service: name=mariadb state=started
+
+
+- hosts: datacenter
+  sudo: yes
+  tasks: 
+  - name: Stop the firewall
+    service: name=firewalld state=stopped enabled=False
+
+- hosts: web
+  sudo: yes
+
+  tasks:
+  - name: Install Apache Packages
+    yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Deploy Site Config Files
+    template: src=templates/index.j2 dest=/var/www/html/index.html
+
+  - name: Start Apache Service
+    service: name=httpd state=started enabled=True
