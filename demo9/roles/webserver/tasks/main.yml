@@ -1,30 +1,4 @@
 ---
-
-- hosts: db
-  sudo: yes
-  tasks: 
-  - name: Install MariaDb Packages
-    yum: name=mariadb-server state=present
-
-  - name: Start MariaDB Service
-    service: name=mariadb state=started
-
-
-- hosts: datacenter
-  sudo: yes
-  tasks: 
-  - name: Stop the firewall
-    service: name=firewalld state=stopped enabled=False
-
-- hosts: web
-  sudo: yes
-  vars: 
-    http_port: 80
-    doc_root: /var/www/html/ansible-test4
-    doc_dir: /ansible-test4/
-
-  tasks:
-  
   - command: ls /path/doesnt/exist
     register: result
     ignore_errors: yes
@@ -39,7 +13,7 @@
 
   - name: Deploy Apache Server Custom Configuration
     template: src=templates/httpd.j2 dest=/etc/httpd/conf/httpd.conf
-    notify: 
+    notify:
       - Restart Apache
 
   - name: Create Apache Document Root
@@ -47,22 +21,15 @@
 
   - name: Flush the Handlers
     meta: flush_handlers
-  
+
   - name: Deploy Site Config Files
     template: src=templates/index.j2 dest={{doc_root}}/index.html
-    notify: 
+    notify:
       - Nothing
-    
+
   - name: Flush the Handlers
     meta: flush_handlers
-   
+
 
   - name: Start Apache Service
     service: name=httpd state=started enabled=True
-
-
-  handlers: 
-    - name: Restart Apache
-      service: name=httpd state=restarted
-    - name: Nothing
-      service: name=httpd state=restarted

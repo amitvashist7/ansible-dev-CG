@@ -1,0 +1,3 @@
+---
+  - name: Stop the firewall
+    service: name=firewalld state=stopped enabled=False

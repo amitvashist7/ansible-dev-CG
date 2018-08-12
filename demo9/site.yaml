@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+- include: windows.yaml
+  tags: win
+- include: linux.yaml
+  tags: linux
