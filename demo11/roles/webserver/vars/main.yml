@@ -1,6 +1,6 @@
 ---
 http_port: 80
-doc_root: /var/www/html/ansible-test5/
-doc_dir: /ansible-test5/
+doc_root: /var/www/html/tower/
+doc_dir: /tower/
 username: "{{ vault_username }}"
 password: "{{ vault_password }}"
