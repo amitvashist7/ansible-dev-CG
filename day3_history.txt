@@ -1,0 +1,423 @@
+    1  ip addr 
+    2  yum install epel-release -y 
+    3  yum install ansible -y 
+    4  ansible --version 
+    5  ls
+    6  mkdir  ansible-dev-CG
+    7  cd ansible-dev-CG/
+    8  ls
+    9  mkdir  demo1
+   10  cd demo1/
+   11  ls
+   12  yum install vim -y 
+   13  ls
+   14  vim inventory
+   15  ansible all -i inventory -u root -m ping -k 
+   16  ssh root@172.31.0.12
+   17  cat /root/.ssh/known_hosts 
+   18  ssh root@172.31.0.11
+   19  ls
+   20  ansible all -i inventory -u root -m ping -k 
+   21  ansible all -i inventory -u root -m ping 
+   22  ansible all -i inventory -u root -m ping -k 
+   23  ls
+   24  df -h 
+   25  ansible all -i inventory -u root -m command -a 'df -h' -k 
+   26  ansible all -i inventory -u root -m command -a 'uname -a' -k 
+   27  cat /etc/redhat-release 
+   28  ansible all -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   29  cat /etc/*-release
+   30  ansible all -i inventory -u root -m command -a 'cat /etc/*-release' -k 
+   31  cat /etc/*-release
+   32  ansible all -i inventory -u root -m command -a 'cat /etc/*-release' -k 
+   33  ansible all -i inventory -u root -m shell -a 'cat /etc/*-release' -k 
+   34  ls
+   35  ansible all -i inventory -u root -m command -a 'mkdir -p /CG' -k 
+   36  ansible all -i inventory -u root -m yum  -a 'name=net-tools state=present' -k 
+   37  ls
+   38  cd ..
+   39  ls
+   40  cp -rf demo1/ demo2
+   41  ls
+   42  cd demo2/
+   43  ls
+   44  vim inventory 
+   45  cat inventory 
+   46  ansible web -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   47  ansible db -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   48  vim  inventory 
+   49  ansible datacenter -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   50  cat inventory 
+   51  vi inventory
+   52  ls
+   53  ansible datacenter -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   54  vi inventory
+   55  ansible datacenter -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   56  ansible all -i inventory -u root -m command -a 'cat /etc/redhat-release' -k 
+   57  vi inventory
+   58  ansible datacenter -i inventory  -m command -a 'cat /etc/redhat-release' 
+   59  cat inventory 
+   60  ls
+   61  cd ..
+   62  ls
+   63  cp -rf demo2 demo3
+   64  cd demo3/
+   65  ls
+   66  mkdir  -p {prod,test}/{group_vars}/{all,db,web}
+   67  ls ltr 
+   68  ls
+   69  yum install tree -y 
+   70  ls
+   71  tree .
+   72  mkdir  -p {prod,test}/{group_vars}/{all,db,web}ls
+   73  cd prod/
+   74  ls
+   75  mv \{group_vars\}/ group_vars
+   76  cd ..
+   77  ls
+   78  cd test/
+   79  ls
+   80  mv \{group_vars\}/ group_vars
+   81  ls
+   82  cd ..
+   83  tree .
+   84  rm -rf prod test
+   85  ls
+   86  mkdir prod/group test 
+   87  mkdir prod/group_vars/all test/group_vars/all -p  
+   88  tree .
+   89  mkdir prod/group_vars/web test/group_vars/web -p  
+   90  mkdir prod/group_vars/db test/group_vars/db -p  
+   91  ls
+   92  tree .
+   93  ls
+   94  mkdir prod/host_vars test/host_vars -p  
+   95  ls
+   96  tree .
+   97  ls
+   98  cp -rf inventory prod/prod_inventory 
+   99  cp -rf inventory test/test_inventory 
+  100  tree .
+  101  ls
+  102  cd prod/
+  103  ls
+  104  vim prod_inventory 
+  105  ls
+  106  rm -rf  group_vars/*
+  107  ls
+  108  tree  .
+  109  ls
+  110  vim group_vars/all
+  111  ls
+  112  cat prod_inventory 
+  113  ls
+  114  vim group_vars/web
+  115  vim group_vars/db
+  116  ls
+  117  ansible web -i prod_inventory -m user -a "name={{username}} password=1234" 
+  118  ansible all -i prod_inventory -m user -a "name={{username}} password=1234" 
+  119  ls
+  120  cd ..
+  121  tree prod/
+  122  rm prod/group_vars/db 
+  123  ansible all -i prod_inventory -m user -a "name={{username}} password=1234" 
+  124  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234" 
+  125  vim prod/host_vars/172.31.0.11
+  126  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234" 
+  127  tree  .
+  128  ls
+  129  cd 
+  130  ls
+  131  useradd amit
+  132  passwd amit
+  133  su - 
+  134  su - amit
+  135  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234"  -f1
+  136  cd ansible-dev-CG/demo3/
+  137  ls
+  138  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234"  -f1
+  139  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234"  -f2
+  140  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234"  -f10
+  141  grep -i fork /etc/ansible/ansible.cfg 
+  142  grep -i host /etc/ansible/ansible.cfg 
+  143  grep -i host_key /etc/ansible/ansible.cfg 
+  144  ls
+  145  cd prod/
+  146  ls
+  147  vim ansible.cfg
+  148  > /root/.ssh/known_hosts 
+  149  vim ansible.cfg
+  150  ls
+  151  > /root/.ssh/known_hosts 
+  152  cat /root/.ssh/known_hosts 
+  153  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  154  ls
+  155  cat /root/.ssh/known_hosts 
+  156  > /root/.ssh/known_hosts 
+  157  cat /root/.ssh/known_hosts 
+  158  ls
+  159  cat ansible.cfg 
+  160  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  161  ls
+  162  cp -rf ansible.cfg /root/
+  163  ls
+  164  cat /root/ansible.cfg 
+  165  ls
+  166  vim ansible.cfg 
+  167  > /root/.ssh/known_hosts 
+  168  cat /root/ansible.cfg 
+  169  cat /root/.ssh/known_hosts 
+  170  cat ansible.cfg 
+  171  cat /root/ansible.cfg 
+  172  grep -i host_key_checking /etc/ansible/ansible.cfg 
+  173  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  174  cat /root/.ssh/known_hosts 
+  175  ls
+  176  cd ..
+  177  ls
+  178  ansible all -i prod/prod_inventory -m user -a "name={{username}} password=1234"  -k
+  179  ls
+  180  cat /root/ansible.cfg 
+  181  vim  /root/ansible.cfg 
+  182  cd 
+  183  ansible all -i ansible-dev-CG/demo3/prod/prod_inventory -m user -a "name={{username}} password=1234"  -k
+  184  ls
+  185  > /root/.ssh/known_hosts 
+  186  cat /root/.ssh/known_hosts
+  187  cd ansible-dev-CG/demo3/
+  188  ls
+  189  cd prod/
+  190  ls
+  191  cat ansible.cfg 
+  192  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  193  ls
+  194  vim ansible.cfg 
+  195  > /root/.ssh/known_hosts 
+  196  ls
+  197  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  198  cat ansible.cfg 
+  199  export ANSIBLE_HOST_KEY_CHECKING=False
+  200  set | grep -i ANSIBLE_HOST_KEY_*
+  201  ansible all -i prod_inventory -m user -a "name={{username}} password=1234"  -k
+  202  cd 
+  203  ls
+  204  mv ansible-dev-CG ansible-demo
+  205  yum install git -y 
+  206  git clone https://github.com/amitvashist7/ansible-dev-CG.git
+  207  ls
+  208  cp -rf ansible-demo/* ansible-dev-CG/
+  209  cd ansible-dev-CG/
+  210  ls
+  211  git add .
+  212  git status 
+  213  ls
+  214  git commit -m "Multiple Demo's"
+  215  git config --global user.email "amitvashist7@gmail.com"
+  216  git config --global user.name "Amit"
+  217  git commit -m "Multiple Demo's"
+  218  git push 
+  219  git status 
+  220  ls
+  221  git push -u origin master
+  222  ls
+  223  ansible-doc -l
+  224  ansible-doc service 
+  225  ansible-doc -l | wc -l 
+  226  ls
+  227  cp -rf demo2/ demo4 
+  228  ls
+  229  cd demo4/
+  230  ls
+  231  cat inventory 
+  232  ansible web -i inventory -m yum "name=httpd state=present" -u vagrant -k 
+  233  ansible web -i inventory -m yum -a "name=httpd state=present" -u vagrant -k 
+  234  ansible web -i inventory -m yum -a "name=httpd state=present" -u vagrant -k -s 
+  235  ansible web -i inventory -m service -a "name=httpd state=started" -u vagrant -k -s 
+  236  curl 172.31.0.11
+  237  ls
+  238  ansible all -i inventory -m service -a "name=firewalld state=stopped" -u vagrant -k -s 
+  239  ls
+  240  vim inventory 
+  241  ansible all -i inventory -m service -a "name=firewalld state=stopped" -u vagrant -k -s 
+  242  ansible all -i inventory -m service -a "name=firewalld state=stopped" -u vagrant -k
+  243  vi inventory 
+  244  ansible all -i inventory -m service -a "name=firewalld state=stopped" -u vagrant -k
+  245  ansible db -i inventory -m yum -a "name=mariadb-server state=present" -u vagrant -k
+  246  vim inventory 
+  247  ansible db -i inventory -m yum -a "name=mariadb-server state=present" -u vagrant -k -s 
+  248  vim inventory 
+  249  ansible all -i inventory -u root -m ping -k 
+  250  ansible web -i inventory -u root -m ping -k 
+  251  ansible db -i inventory -u root -m ping -k 
+  252  ansible web:db -i inventory -u root -m ping -k 
+  253  cat inventory 
+  254  ansible web:&prod -i inventory -u root -m ping -k 
+  255  ansible 'web:&prod' -i inventory -u root -m ping -k 
+  256  ansible 'web:&prod:!db' -i inventory -u root -m ping -k 
+  257  vim inventory 
+  258  ansible 'web:&prod:!python3' -i inventory -u root -m ping -k 
+  259  ls
+  260  history 
+  261  cd ..
+  262  ls
+  263  history > day1_history.txt
+  264  git add . 
+  265  git commit -m "Group & Patterns"
+  266  git push -u origin master
+  267  cd 
+  268  wget https://github.com/amitvashist7/ansible-tower-examples/blob/master/ansible-tower-setup/ansible-tower-setup-latest.tar.gz
+  269  curl  https://github.com/amitvashist7/ansible-tower-examples/blob/master/ansible-tower-setup/ansible-tower-setup-latest.tar.gz
+  270  ls
+  271  yum install wget -y 
+  272  wget https://github.com/amitvashist7/ansible-tower-examples/blob/master/ansible-tower-setup/ansible-tower-setup-latest.tar.gz
+  273  s
+  274  ls
+  275  rm -rf ansible-dev-CG
+  276  git clone https://github.com/amitvashist7/ansible-dev-CG.git
+  277  cp -rf ansible-tower-setup-latest.tar.gz ansible-dev-CG/
+  278  cd ansible-dev-CG/
+  279  ls
+  280  git add .
+  281  git commit -m "Tower Setup"
+  282  git push -u origin master
+  283  ls
+  284  cd ..
+  285  l
+  286  ls
+  287  tar -zxvf ansible-tower-setup-latest.tar.gz 
+  288  ls
+  289  file ansible-tower-setup-latest.tar.gz 
+  290  cat ansible-tower-setup-latest.tar.gz 
+  291  ls
+  292  rm -rf ansible-tower-setup-latest.tar.gz 
+  293  git clone https://github.com/amitvashist7/ansible-tower-examples.git
+  294  ls
+  295  cd ansible-tower-examples/ansible-tower-setup/
+  296  ls
+  297  tar  -zxvf ansible-tower-setup-latest.tar.gz 
+  298  ls
+  299  cd ansible-tower-setup-3.2.1/
+  300  ls
+  301  vim inventory 
+  302  vim setup.sh 
+  303  ls
+  304  vim install.yml 
+  305  grep -i *password* inventory 
+  306  grep -i password inventory 
+  307  ./setup.sh 
+  308  less /var/log/tower/setup-2018-08-13-06:38:46.log
+  309  q
+  310  ls
+  311  cd roles/
+  312  ls
+  313  cd ..
+  314  ls
+  315  find . amit
+  316  ls
+  317  cd ..
+  318  ls
+  319  cd ..
+  320  ls
+  321  cd
+  322  awx-manage --help
+  323  pip install tower-cli
+  324  yum install python-pip 
+  325  pip install tower-cli
+  326  pip install ansible- tower-cli
+  327  pip install ansible-tower-cli
+  328  tower-cli user list 
+  329  tower-cli host 172.31.0.10
+  330  tower-cli host "172.31.0.10"
+  331  tower-cli config host "172.31.0.10"
+  332  tower-cli config user "admin"
+  333  tower-cli config username "admin"
+  334  tower-cli config password "redhat"
+  335  ls
+  336  tower-cli user list 
+  337  tower-cli inventory list 
+  338  ls
+  339  cd ansible-dev-CG/
+  340  ls
+  341  cd demo11/
+  342  ls
+  343  cat inventory 
+  344  awx-manage --help
+  345  awx-manage inventory_import --source=inventory --inventory-id=2 --overwrite
+  346  cp -rf inventory inventory-1 
+  347  vim inventory-1 
+  348  awx-manage inventory_import --source=inventory-1 --inventory-id=2 --overwrite
+  349  ls
+  350  pwd
+  351  cd 
+  352  awx-manage inventory_import --source=/root/ansible-dev-CG/demo11/inventory-1 --inventory-id=2 --overwrite
+  353  ls
+  354  ls -a 
+  355  cat /root/ansible-dev-CG/demo11/ansible.cfg 
+  356  cat /root/.amit
+  357  vim /root/.amit
+  358  awx-manage inventory_import --source=/root/ansible-dev-CG/demo11/inventory-1 --inventory-id=2 --overwrite
+  359  vim /root/.amit
+  360  awx-manage inventory_import --source=/root/ansible-dev-CG/demo11/inventory-1 --inventory-id=2 --overwrite
+  361  vim /root/.amit
+  362  awx-manage inventory_import --source=/root/ansible-dev-CG/demo11/inventory-1 --inventory-id=2 --overwrite
+  363  vim /root/.amit
+  364  awx-manage inventory_import --source=/root/ansible-dev-CG/demo11/inventory-1 --inventory-id=2 --overwrite
+  365  ls
+  366  cd ansible-tower-examples/
+  367  cd ..
+  368  ls
+  369  cd ansible-dev-CG/demo11/
+  370  ls
+  371  cp -rf ansible.cfg  .
+  372  cp -rf ansible.cfg  /root/
+  373  cp -rf inventory-1 /root/
+  374  cd 
+  375  vim ansible.cfg 
+  376  awx-manage inventory_import --source=/root/inventory-1 --inventory-id=2 --overwrite
+  377  cd ansible-dev-CG/
+  378  ls
+  379  cd demo11/
+  380  ls
+  381  cat group_vars/web/vault 
+  382  ansible-vault view group_vars/web/vault
+  383  vi /root/.amit 
+  384  ansible-vault view group_vars/web/vault
+  385  vi /root/.amit 
+  386  ansible-vault view group_vars/web/vault
+  387  cat /root/.amit 
+  388  tower-cli job list 
+  389  tower-cli job_template list
+  390  ls
+  391  vim roles/webserver/vars/main.yml 
+  392  ansible-vault edit group_vars/web/vault 
+  393  ansible-vault edit host_vars/172.31.0.12/vault 
+  394  cd ..
+  395  git add .
+  396  git commit -m "Tower PlayBook Demo."
+  397  git push -u origin master
+  398  tower-cli job list 
+  399  tower-cli job monitor 26
+  400  tower-cli job monitor 21
+  401  cd /var/lib/awx/
+  402  ls
+  403  cd job_status/
+  404  ls
+  405  cat 26-8bcec62a-9edb-11e8-9a70-525400c9c704.out
+  406  ls
+  407  cd ..
+  408  ls
+  409  cd projects/
+  410  ls
+  411  cd _6__ansible_training/
+  412  ls
+  413  cd demo11/
+  414  ls
+  415  ansible-vault view host_vars/172.31.0.12/vault 
+  416  ansible-vault view group_vars/web/vault 
+  417  cd 
+  418   cd - 
+  419  cd ../
+  420  ls
+  421  cd /root/ansible-dev-CG/
+  422  ls
+  423  history > day3_history.txt 
